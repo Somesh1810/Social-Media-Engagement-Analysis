@@ -1,190 +1,172 @@
-#  Social Media Engagement Analysis  
-### Exploratory Data Analysis & Visualization using Python
+# 📊 Social Media Engagement Analysis
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)]
-[![Pandas](https://img.shields.io/badge/Library-Pandas-blue)]
-[![Matplotlib](https://img.shields.io/badge/Visualization-Matplotlib-orange)]
-[![Seaborn](https://img.shields.io/badge/Visualization-Seaborn-green)]
-[![Status](https://img.shields.io/badge/Project-Completed-success)]
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?logo=pandas)
+![Seaborn](https://img.shields.io/badge/Seaborn-0.13-4C72B0)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 
----
-
-##  Project Summary
-
-This project simulates and analyzes social media engagement data to identify patterns in user interactions across multiple content categories.
-
-Using Python-based data analysis and visualization libraries, the project demonstrates a complete data pipeline:
-
-- Data generation  
-- Data cleaning  
-- Exploratory Data Analysis (EDA)  
-- Statistical analysis  
-- Visualization-driven insights  
-
-The analysis focuses on understanding how engagement (Likes) varies across different categories.
+An end-to-end **Exploratory Data Analysis (EDA)** project that simulates a real-world social media dataset and analyses user engagement across 8 content categories and 4 platforms — using Python, Pandas, Seaborn, and Matplotlib.
 
 ---
 
-##  Objective
-
-To analyze social media engagement trends by:
-
-- Simulating structured engagement data
-- Cleaning and preparing the dataset
-- Visualizing Like distributions
-- Identifying high-performing categories
-- Computing statistical summaries
-
----
-
-##  Dataset Overview
-
-- **Total Records:** 500
-- **Categories:** 8
-    - Food
-    - Travel
-    - Fashion
-    - Fitness
-    - Music
-    - Culture
-    - Family
-    - Health
-- **Metrics Analyzed:** Likes
-- **Date Range:** Starting from 2021-01-01
+## 📌 Table of Contents
+- [Problem Statement](#-problem-statement)
+- [Dataset](#-dataset)
+- [Project Pipeline](#-project-pipeline)
+- [Key Findings](#-key-findings)
+- [Visualisations](#-visualisations)
+- [Tech Stack](#-tech-stack)
+- [How to Run](#-how-to-run)
+- [Project Structure](#-project-structure)
+- [Future Improvements](#-future-improvements)
 
 ---
 
-##  Data Processing Pipeline
+## 🎯 Problem Statement
 
-###  Data Generation
-- Random category assignment
-- Random Like counts (0–10,000)
-- Date range creation using `pd.date_range()`
+Social media managers and content strategists need to understand **which content categories and platforms drive the highest user engagement**. This project simulates 500 posts over 16 months and answers:
 
-###  Data Cleaning
-- Removed null values
-- Removed duplicates
-- Converted Date to datetime format
-- Ensured Likes were integer type
-
-###  Exploratory Data Analysis
-- Distribution analysis of Likes
-- Category-wise comparison
-- Statistical mean calculation
+- Which content category has the highest engagement rate?
+- Which platform performs best?
+- How does engagement trend over time?
+- Which metrics are most correlated with high engagement?
 
 ---
 
-##  Visualizations
+## 📂 Dataset
 
-###  Histogram – Distribution of Likes
-- Shows frequency distribution
-- Identifies engagement spread
-- Highlights skewness or outliers
+| Column | Type | Description |
+|---|---|---|
+| `Date` | datetime | Post date (Jan 2023 – May 2024) |
+| `Category` | str | Content category (Food, Travel, Fashion, etc.) |
+| `Platform` | str | Instagram, Twitter, Facebook, TikTok |
+| `Views` | int | Total post views |
+| `Likes` | int | Total likes |
+| `Comments` | int | Total comments |
+| `Shares` | int | Total shares |
+| `total_engagement` | int | Likes + Comments + Shares *(engineered)* |
+| `engagement_rate` | float | (total_engagement / Views) × 100 *(engineered)* |
 
-###  Boxplot – Likes by Category
-- Compares engagement across categories
-- Detects high-performing content types
-- Identifies variability and outliers
-
----
-
-##  Statistical Analysis
-
-- Calculated overall mean Likes
-- Computed category-wise average Likes using `groupby()`
-
-### Key Insight:
-Categories such as **Fashion** and **Travel** showed higher average engagement, indicating stronger audience interaction compared to others.
+- **500 records** · **No null values** · **No duplicates**
+- Likes, Comments, and Shares are generated as realistic proportions of Views
 
 ---
 
-##  Technology Stack
+## 🔄 Project Pipeline
 
-| Component | Tools Used |
-|------------|------------|
-| Programming | Python |
-| Data Manipulation | Pandas, NumPy |
-| Visualization | Matplotlib, Seaborn |
-| Statistical Analysis | Pandas GroupBy |
+```
+Generate Dataset → Explore → Clean → Feature Engineering → Analyse → Visualise → Insights
+```
 
----
-
-##  Project Structure
-social-media-engagement-analysis/
-│
-├── analysis.py
-├── histogram_likes.png
-├── boxplot_likes.png
-└── README.md
-
+| Step | Task |
+|---|---|
+| 1 | Generate multi-column simulated dataset with realistic ratios |
+| 2 | Data exploration — dtypes, nulls, distributions, value counts |
+| 3 | Data cleaning — drop nulls, duplicates, enforce types |
+| 4 | Feature engineering — engagement_rate, total_engagement, YearMonth |
+| 5 | Statistical analysis — category/platform averages, top 10 posts, correlation matrix |
+| 6 | 7 visualisations saved as high-res PNGs |
+| 7 | Automated key insights summary printed to console |
 
 ---
 
-##  How to Run
+## 📈 Key Findings
 
-###  Clone Repository
+| Metric | Result |
+|---|---|
+| Overall avg engagement rate | **40.17%** |
+| Highest engagement category | **Fashion (43.33%)** |
+| Lowest engagement category | **Family (35.59%)** |
+| Best performing platform | **Twitter (42.13%)** |
+| Strongest metric correlation | **Likes ↔ Total Engagement (r = 0.98)** |
+| Engagement rate vs Views | **No correlation (r = −0.01)** — more views does not mean better engagement rate |
 
-``
-git clone https://github.com/Somesh1810/social-media-engagement-analysis.git
-cd social-media-engagement-analysis ``
+> 💡 **Key insight:** A post going viral (high Views) does not guarantee a high engagement rate. Content quality (Likes, Comments, Shares relative to Views) matters more than raw reach.
 
-Install Dependencies
+---
+
+## 📊 Visualisations
+
+| # | Chart | Insight |
+|---|---|---|
+| 1 | Histogram of Likes | Roughly uniform distribution across 0–30K likes |
+| 2 | Boxplot — Likes by Category | Fashion and Travel show higher median likes |
+| 3 | Avg Engagement Rate by Category | Fashion leads at 43.33%; Family lags at 35.59% |
+| 4 | Monthly Engagement Trend | Engagement peaks visible in mid and end-of-year months |
+| 5 | Avg Engagement Rate by Platform | Twitter slightly outperforms TikTok |
+| 6 | Correlation Heatmap | Likes strongly predict total engagement (r = 0.98) |
+| 7 | Likes vs Views Scatter | Positive trend with category-level variation |
+
+> Charts are saved to the `charts/` folder after running the script.
+
+---
+
+## 🛠 Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| Python 3.10+ | Core language |
+| Pandas | Data manipulation and groupby analysis |
+| NumPy | Random data generation and numerical ops |
+| Matplotlib | Base plotting and chart customisation |
+| Seaborn | Statistical visualisations |
+
+---
+
+## ▶️ How to Run
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/Somesh1810/Social-Media-Engagement-Analysis.git
+cd Social-Media-Engagement-Analysis
+```
+
+**2. Install dependencies**
+```bash
 pip install pandas numpy matplotlib seaborn
+```
 
-Run Script
-python analysis.py
+**3. Run the script**
+```bash
+python3 SocialMediaDataAnalysis.py
+```
 
-Business Relevance
+Charts will be saved automatically to the `charts/` folder.
 
-This project demonstrates practical skills required for:
+---
 
-Data Analyst roles
+## 🗂 Project Structure
 
-Marketing Analytics
+```
+Social-Media-Engagement-Analysis/
+│
+├── SocialMediaDataAnalysis.py   # Main analysis script
+├── charts/                      # Output visualisations (auto-created)
+│   ├── 01_histogram_likes.png
+│   ├── 02_boxplot_likes_category.png
+│   ├── 03_engagement_rate_category.png
+│   ├── 04_monthly_trend.png
+│   ├── 05_engagement_rate_platform.png
+│   ├── 06_correlation_heatmap.png
+│   └── 07_scatter_likes_views.png
+├── Social_Media_Engagement_Analysis.pdf   # Project report
+└── README.md
+```
 
-Social Media Analytics
+---
 
-Business Intelligence
+## 🚀 Future Improvements
 
-EDA & Visualization tasks
+- [ ] Use a real dataset from Kaggle (e.g. Instagram/Twitter engagement data)
+- [ ] Add a Jupyter Notebook version with inline charts
+- [ ] Build an interactive Streamlit dashboard
+- [ ] Extend to multi-year trend analysis
+- [ ] Add a simple ML model to predict engagement rate
 
-It simulates real-world engagement analysis used by digital marketing teams to:
+---
 
-Identify high-performing content
+## 👤 Author
 
-Optimize content strategies
+**Somesh** · [GitHub @Somesh1810](https://github.com/Somesh1810)
 
-Improve audience targeting
-
-## Future Improvements
-
-Time-series engagement trend analysis
-
-Multi-metric analysis (Shares, Comments, Saves)
-
-Predictive modeling for engagement forecasting
-
-Dashboard creation using Power BI or Streamlit
-
-Real-world dataset integration via APIs
-
- ## Academic Context
-
-Course: Data Analytics / Python for Data Analysis
-Institution: CHRIST (Deemed to be University), Bangalore
-Author: Someshwar M
-Generated on: 2025-06-22
-
-## Author
-
-Someshwar M
-M.Sc. Data Analytics
-Aspiring Data Analyst | Data Visualization Enthusiast
-
-Mail:msomeshn@gmail.com
-GitHub: https://github.com/Somesh1810
-Linked In: www.linkedin.com/in/someshwar-m
-
-
-
-
+*Built as part of a data analyst portfolio project.*
